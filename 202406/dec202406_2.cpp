@@ -77,7 +77,7 @@ int main()
 	auto map = read_and_pad_map();
 
 	auto [start_x, start_y] = [&map]() -> std::pair<int, int> {
-		for (auto [y, str] : std::views::enumerate(map)) {
+		for (const auto &[y, str] : std::views::enumerate(map)) {
 			if (auto x = str.find('^'); x != std::string::npos) {
 				return {x, y};
 			}
