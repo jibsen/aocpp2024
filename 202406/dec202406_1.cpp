@@ -57,15 +57,7 @@ int main()
 	}
 
 	// Count number of Xs
-	auto positions_visited = std::ranges::fold_left(
-		map | std::views::transform(
-			[](const auto &str) {
-				return std::ranges::count(str, 'X');
-			}
-		),
-		0,
-		std::plus{}
-	);
+	auto positions_visited = std::ranges::count(map | std::views::join, 'X');
 
 	std::println("{} positions visited", positions_visited);
 }
