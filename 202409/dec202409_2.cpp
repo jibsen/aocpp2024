@@ -50,21 +50,19 @@ void compact_drive(auto &drive)
 		for (auto it = drive.begin(), it_end = --cur.base(); it != it_end; ++it) {
 			auto &[id, size, was_moved] = *it;
 
-			if (id != -1 || size < cur_size) {
-				continue;
+			if (id == -1 && size >= cur_size) {
+				// Insert node corresponding to cur before it
+				drive.insert(it, {cur_id, cur_size, true});
+
+				// Resize it to free space left
+				size -= cur_size;
+
+				// Turn cur into free space
+				cur_id = -1;
+				cur_was_moved = true;
+
+				break;
 			}
-			
-			// Insert node corresponding to cur before it
-			drive.insert(it, {cur_id, cur_size, true});
-
-			// Resize it to free space left
-			size -= cur_size;
-
-			// Turn cur into free space
-			cur_id = -1;
-			cur_was_moved = true;
-
-			break;
 		}
 	}
 }
