@@ -16,13 +16,13 @@ auto read_map()
 
 	// Read disk map and convert to blocks in drive
 	for (char ch = ' '; std::cin >> ch && ch >= '0' && ch <= '9'; ) {
-		int digit = ch - '0';
+		int size = ch - '0';
 
 		if (free_space) {
-			drive.emplace_back(-1, digit, true);
+			drive.emplace_back(-1, size, true);
 		}
 		else {
-			drive.emplace_back(id, digit, false);
+			drive.emplace_back(id, size, false);
 			++id;
 		}
 
