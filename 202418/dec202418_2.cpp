@@ -10,6 +10,7 @@
 #include <iterator>
 #include <print>
 #include <queue>
+#include <ranges>
 #include <string>
 #include <tuple>
 #include <unordered_set>
@@ -108,8 +109,12 @@ int main()
 
 	for (auto [x, y] : bytes) {
 		map[y + 1][x + 1] = '#';
+	}
 
-		if (!has_path(map)) {
+	for (auto [x, y] : bytes | std::views::reverse) {
+		map[y + 1][x + 1] = '.';
+
+		if (has_path(map)) {
 			std::println("{},{}", x, y);
 			break;
 		}
