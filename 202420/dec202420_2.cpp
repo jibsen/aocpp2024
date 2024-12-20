@@ -2,19 +2,17 @@
 // Advent of Code 2024, day 20, part two
 //
 
-#include <algorithm>
 #include <array>
 #include <cstddef>
+#include <cstdlib>
 #include <functional>
 #include <iostream>
-#include <iterator>
 #include <print>
 #include <queue>
 #include <ranges>
 #include <string>
 #include <tuple>
 #include <unordered_map>
-#include <unordered_set>
 #include <utility>
 #include <vector>
 
