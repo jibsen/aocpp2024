@@ -121,23 +121,17 @@ int main()
 
 	long num_saving_100 = 0;
 
-	for (int y = 1; y + 1 < map.size(); ++y) {
-		for (int x = 1; x + 1 < map.front().size(); ++x) {
-			if (map[y][x] == '#') {
-				continue;
-			}
+	for (auto [pos, dist_to_pos] : dist_from_start) {
+		auto [x, y] = pos;
 
-			if (auto start_it = dist_from_start.find({x, y}); start_it != dist_from_start.end()) {
-				auto reachable = get_reachable_within_distance(map, x, y, 20);
+		auto reachable = get_reachable_within_distance(map, x, y, 20);
 
-				for (auto [cheat_x, cheat_y, dist] : reachable) {
-					if (auto end_it = dist_to_end.find({cheat_x, cheat_y}); end_it != dist_to_end.end()) {
-						auto new_time = start_it->second + end_it->second + dist;
+		for (auto [cheat_x, cheat_y, cheat_dist] : reachable) {
+			if (auto end_it = dist_to_end.find({cheat_x, cheat_y}); end_it != dist_to_end.end()) {
+				auto new_time = dist_to_pos + end_it->second + cheat_dist;
 
-						if (new_time + 100 <= fastest_time) {
-							++num_saving_100;
-						}
-					}
+				if (new_time + 100 <= fastest_time) {
+					++num_saving_100;
 				}
 			}
 		}
